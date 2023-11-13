@@ -1,0 +1,22 @@
+name: main
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: convictional/trigger-workflow-and-wait@v1.6.1
+        with:
+          owner: repo-meister-actions
+          repo: java-maven-example
+          github_token: ${{ secrets.WORKFLOW_TRIGGER_TOKEN }}
+          workflow_file_name: main.yml
+          wait_interval: 120
+          propagate_failure: true
+          trigger_workflow: true
+          wait_workflow: true
